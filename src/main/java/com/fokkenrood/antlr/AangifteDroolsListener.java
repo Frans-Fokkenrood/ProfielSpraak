@@ -27,7 +27,7 @@ public class AangifteDroolsListener extends ProfielSpraakBaseListener {
 	@Override
 	public void enterRegel(RegelContext ctx) {
 		drlWhen.setLength(0);
-		drlWhen.append("package com.fokkenrood.");
+		drlWhen.append("package ");
 		drlWhen.append(regelset);
 		drlWhen.append("\n\n");
 		drlWhen.append("import com.fokkenrood.drools.Aangifte;\n\n");
@@ -43,9 +43,9 @@ public class AangifteDroolsListener extends ProfielSpraakBaseListener {
 
 	@Override
 	public void exitRegel(RegelContext ctx) {
-		drlThen.append("    $aangifte.score = \"");
+		drlThen.append("    $aangifte.setScore(\"");
 		drlThen.append(ctx.w.getText());
-		drlThen.append("\";\n");
+		drlThen.append("\");\n");
 		drlThen.append("end\n");
 	}	// end exitRegel
 

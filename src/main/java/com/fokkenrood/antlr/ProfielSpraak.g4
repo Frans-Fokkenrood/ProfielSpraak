@@ -1,11 +1,5 @@
 grammar ProfielSpraak;
 
-statements
-	:
-	(	regel
-	)+
-	;
-
 regel
 	:
 	(	MMAAK EEN SCORE MET DE VOLGENDE PARAMETERS DUBBELE_PUNT
