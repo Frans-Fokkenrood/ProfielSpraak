@@ -16,7 +16,7 @@ set CLASSPATH=%CLASSPATH%;..\..\..\droolsjbpm-tools-distribution-6.3.0.Final\bin
 set regel="Maak een score met de volgende parameters:
 set regel=%regel%  - score is HOOG 
 set regel=%regel%indien aan de volgende voorwaarden wordt voldaan:
-set regel=%regel%  - de aangifte heeft rubriek bestemming is gelijk aan \"Frankrijk\"
+set regel=%regel%  - de aangifte heeft rubriek bestemming is gelijk aan \"Drankrijk\"
 set regel=%regel%  - de aangifte heeft rubriek omschrijving bevat \"BOM\"
 set regel=%regel%."
 
