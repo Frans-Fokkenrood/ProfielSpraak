@@ -30,7 +30,7 @@ public class Interpreteer {
 		
 		//	Debug info:
 		System.out.println("- De ANTLR4 compiler neemt als bron '" + input.getSourceName() + "'...\n");
-		System.out.println(drlRset);
+//		System.out.println(drlRset);
 		
 		//	Beslis:
 		KieServices ks = KieServices.Factory.get();
