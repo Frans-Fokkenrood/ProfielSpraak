@@ -8,6 +8,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface ProfielSpraakListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link ProfielSpraakParser#statements}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatements(ProfielSpraakParser.StatementsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProfielSpraakParser#statements}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatements(ProfielSpraakParser.StatementsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProfielSpraakParser#regel}.
 	 * @param ctx the parse tree
 	 */
@@ -17,6 +27,16 @@ public interface ProfielSpraakListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRegel(ProfielSpraakParser.RegelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProfielSpraakParser#toekenning}.
+	 * @param ctx the parse tree
+	 */
+	void enterToekenning(ProfielSpraakParser.ToekenningContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProfielSpraakParser#toekenning}.
+	 * @param ctx the parse tree
+	 */
+	void exitToekenning(ProfielSpraakParser.ToekenningContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProfielSpraakParser#object}.
 	 * @param ctx the parse tree

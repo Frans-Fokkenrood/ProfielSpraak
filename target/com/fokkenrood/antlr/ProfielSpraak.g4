@@ -1,22 +1,39 @@
 grammar ProfielSpraak;
 
+statements
+	:
+	(	regel
+	)+
+	;
+
 regel
 	:
-	(	MMAAK EEN SCORE MET DE VOLGENDE PARAMETERS DUBBELE_PUNT
- 		STREEPJE SCORE IS w=waarde
-		INDIEN AAN DE VOLGENDE VOORWAARDEN WORDT VOLDAAN DUBBELE_PUNT
+	(	RREGEL rg=TEKST LUIDT DUBBELE_PUNT
+ 		(	toekenning
+ 		)+
+		INDIEN AAN ALLE VOLGENDE VOORWAARDEN WORDT VOLDAAN DUBBELE_PUNT
 		(	object
 		)+
 		PUNT
 	)
 	;
+
+toekenning
+	:
+	(	(	HHET 
+		|	EN DE
+		|	EN HET
+		)
+		f=feit WORDT
+		(	GESTELD OP w=waarde
+		|	BEREKEND ALS ( DE | HET ) f1=feit MAAL ( DE | HET ) f2=feit
+		)
+	)
+	;
 	
 object
 	:
-	(	STREEPJE DE AANGIFTE HEEFT RUBRIEK f=feit
-		(	v=vergelijking w1=waarde
-		|	BEVAT ( not=NIET )? w2=waarde
-		)
+	(	STREEPJE f=feit v=vergelijking w=waarde
 	)
 	;
 			
@@ -43,7 +60,8 @@ vergelijking returns [String operator]
 feit returns [String signifier]
 	:
 	(	WOORD										{ $signifier  = $WOORD.text; }
-		(	WOORD									{ $signifier += (" " + $WOORD.text); }
+		(	WOORD									{ $signifier += ("_" + $WOORD.text); }
+		|	AAN										{ $signifier += ("_aan"); }
 		)*
 	) 
 	;
@@ -59,25 +77,27 @@ fragment CIJFER:		[0-9] ;
 
 TEKST:					QUOTE .*? QUOTE					{ setText(getText().replaceAll("\"","")); } ;
 
-AANGIFTE:				'aangifte' ;
 AAN:					'aan' ;
-BEVAT:					'bevat' ;
+ALLE:					'alle' ;
+ALS:					'als' ;
+BEREKEND:				'berekend' ;
 DAN:					'dan' ;
 DE:						'de' ;
-EEN:					'een' ;
+EN:						'en' ;
 GELIJK:					'gelijk' ;
+GESTELD:				'gesteld' ;
 GROTER:					'groter' ;
-HEEFT:					'heeft' ;
+HHET:					'Het' ;
+HET:					'het' ;
 INDIEN:					'indien' ;
 IS:						'is' ;
 KLEINER:				'kleiner' ;
-MMAAK:					'Maak' ;
-MET:					'met' ;
+LUIDT:					'luidt' ;
+MAAL:					'maal' ;
 NIET:					'niet' ;
 OF:						'of' ;
-PARAMETERS:				'parameters' ;
-RUBRIEK:				'rubriek' ;
-SCORE:					'score' ;
+OP:						'op' ;
+RREGEL:					'Regel' ;
 VOLDAAN:				'voldaan' ;
 VOLGENDE:				'volgende' ;
 VOORWAARDEN:			'voorwaarden' ;

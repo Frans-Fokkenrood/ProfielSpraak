@@ -17,29 +17,30 @@ public class ProfielSpraakParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		BLOCKCOMMENT=1, LINECOMMENT=2, TEKST=3, AANGIFTE=4, AAN=5, BEVAT=6, DAN=7, 
-		DE=8, EEN=9, GELIJK=10, GROTER=11, HEEFT=12, INDIEN=13, IS=14, KLEINER=15, 
-		MMAAK=16, MET=17, NIET=18, OF=19, PARAMETERS=20, RUBRIEK=21, SCORE=22, 
-		VOLDAAN=23, VOLGENDE=24, VOORWAARDEN=25, WORDT=26, DUBBELE_PUNT=27, GETAL_NUL=28, 
-		PUNT=29, STREEPJE=30, GETAL=31, WOORD=32, WS=33;
+		BLOCKCOMMENT=1, LINECOMMENT=2, TEKST=3, AAN=4, ALLE=5, ALS=6, BEREKEND=7, 
+		DAN=8, DE=9, EN=10, GELIJK=11, GESTELD=12, GROTER=13, HHET=14, HET=15, 
+		INDIEN=16, IS=17, KLEINER=18, LUIDT=19, MAAL=20, NIET=21, OF=22, OP=23, 
+		RREGEL=24, VOLDAAN=25, VOLGENDE=26, VOORWAARDEN=27, WORDT=28, DUBBELE_PUNT=29, 
+		GETAL_NUL=30, PUNT=31, STREEPJE=32, GETAL=33, WOORD=34, WS=35;
 	public static final int
-		RULE_regel = 0, RULE_object = 1, RULE_waarde = 2, RULE_vergelijking = 3, 
-		RULE_feit = 4;
+		RULE_statements = 0, RULE_regel = 1, RULE_toekenning = 2, RULE_object = 3, 
+		RULE_waarde = 4, RULE_vergelijking = 5, RULE_feit = 6;
 	public static final String[] ruleNames = {
-		"regel", "object", "waarde", "vergelijking", "feit"
+		"statements", "regel", "toekenning", "object", "waarde", "vergelijking", 
+		"feit"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, null, null, null, "'aangifte'", "'aan'", "'bevat'", "'dan'", "'de'", 
-		"'een'", "'gelijk'", "'groter'", "'heeft'", "'indien'", "'is'", "'kleiner'", 
-		"'Maak'", "'met'", "'niet'", "'of'", "'parameters'", "'rubriek'", "'score'", 
-		"'voldaan'", "'volgende'", "'voorwaarden'", "'wordt'", "':'", "'0'", "'.'", 
-		"'-'"
+		null, null, null, null, "'aan'", "'alle'", "'als'", "'berekend'", "'dan'", 
+		"'de'", "'en'", "'gelijk'", "'gesteld'", "'groter'", "'Het'", "'het'", 
+		"'indien'", "'is'", "'kleiner'", "'luidt'", "'maal'", "'niet'", "'of'", 
+		"'op'", "'Regel'", "'voldaan'", "'volgende'", "'voorwaarden'", "'wordt'", 
+		"':'", "'0'", "'.'", "'-'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "BLOCKCOMMENT", "LINECOMMENT", "TEKST", "AANGIFTE", "AAN", "BEVAT", 
-		"DAN", "DE", "EEN", "GELIJK", "GROTER", "HEEFT", "INDIEN", "IS", "KLEINER", 
-		"MMAAK", "MET", "NIET", "OF", "PARAMETERS", "RUBRIEK", "SCORE", "VOLDAAN", 
+		null, "BLOCKCOMMENT", "LINECOMMENT", "TEKST", "AAN", "ALLE", "ALS", "BEREKEND", 
+		"DAN", "DE", "EN", "GELIJK", "GESTELD", "GROTER", "HHET", "HET", "INDIEN", 
+		"IS", "KLEINER", "LUIDT", "MAAL", "NIET", "OF", "OP", "RREGEL", "VOLDAAN", 
 		"VOLGENDE", "VOORWAARDEN", "WORDT", "DUBBELE_PUNT", "GETAL_NUL", "PUNT", 
 		"STREEPJE", "GETAL", "WOORD", "WS"
 	};
@@ -92,38 +93,83 @@ public class ProfielSpraakParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
+	public static class StatementsContext extends ParserRuleContext {
+		public List<RegelContext> regel() {
+			return getRuleContexts(RegelContext.class);
+		}
+		public RegelContext regel(int i) {
+			return getRuleContext(RegelContext.class,i);
+		}
+		public StatementsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_statements; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProfielSpraakListener ) ((ProfielSpraakListener)listener).enterStatements(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProfielSpraakListener ) ((ProfielSpraakListener)listener).exitStatements(this);
+		}
+	}
+
+	public final StatementsContext statements() throws RecognitionException {
+		StatementsContext _localctx = new StatementsContext(_ctx, getState());
+		enterRule(_localctx, 0, RULE_statements);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(15); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(14);
+				regel();
+				}
+				}
+				setState(17); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==RREGEL );
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static class RegelContext extends ParserRuleContext {
-		public WaardeContext w;
-		public TerminalNode MMAAK() { return getToken(ProfielSpraakParser.MMAAK, 0); }
-		public TerminalNode EEN() { return getToken(ProfielSpraakParser.EEN, 0); }
-		public List<TerminalNode> SCORE() { return getTokens(ProfielSpraakParser.SCORE); }
-		public TerminalNode SCORE(int i) {
-			return getToken(ProfielSpraakParser.SCORE, i);
-		}
-		public TerminalNode MET() { return getToken(ProfielSpraakParser.MET, 0); }
-		public List<TerminalNode> DE() { return getTokens(ProfielSpraakParser.DE); }
-		public TerminalNode DE(int i) {
-			return getToken(ProfielSpraakParser.DE, i);
-		}
-		public List<TerminalNode> VOLGENDE() { return getTokens(ProfielSpraakParser.VOLGENDE); }
-		public TerminalNode VOLGENDE(int i) {
-			return getToken(ProfielSpraakParser.VOLGENDE, i);
-		}
-		public TerminalNode PARAMETERS() { return getToken(ProfielSpraakParser.PARAMETERS, 0); }
+		public Token rg;
+		public TerminalNode RREGEL() { return getToken(ProfielSpraakParser.RREGEL, 0); }
+		public TerminalNode LUIDT() { return getToken(ProfielSpraakParser.LUIDT, 0); }
 		public List<TerminalNode> DUBBELE_PUNT() { return getTokens(ProfielSpraakParser.DUBBELE_PUNT); }
 		public TerminalNode DUBBELE_PUNT(int i) {
 			return getToken(ProfielSpraakParser.DUBBELE_PUNT, i);
 		}
-		public TerminalNode STREEPJE() { return getToken(ProfielSpraakParser.STREEPJE, 0); }
-		public TerminalNode IS() { return getToken(ProfielSpraakParser.IS, 0); }
 		public TerminalNode INDIEN() { return getToken(ProfielSpraakParser.INDIEN, 0); }
 		public TerminalNode AAN() { return getToken(ProfielSpraakParser.AAN, 0); }
+		public TerminalNode ALLE() { return getToken(ProfielSpraakParser.ALLE, 0); }
+		public TerminalNode VOLGENDE() { return getToken(ProfielSpraakParser.VOLGENDE, 0); }
 		public TerminalNode VOORWAARDEN() { return getToken(ProfielSpraakParser.VOORWAARDEN, 0); }
 		public TerminalNode WORDT() { return getToken(ProfielSpraakParser.WORDT, 0); }
 		public TerminalNode VOLDAAN() { return getToken(ProfielSpraakParser.VOLDAAN, 0); }
 		public TerminalNode PUNT() { return getToken(ProfielSpraakParser.PUNT, 0); }
-		public WaardeContext waarde() {
-			return getRuleContext(WaardeContext.class,0);
+		public TerminalNode TEKST() { return getToken(ProfielSpraakParser.TEKST, 0); }
+		public List<ToekenningContext> toekenning() {
+			return getRuleContexts(ToekenningContext.class);
+		}
+		public ToekenningContext toekenning(int i) {
+			return getRuleContext(ToekenningContext.class,i);
 		}
 		public List<ObjectContext> object() {
 			return getRuleContexts(ObjectContext.class);
@@ -147,68 +193,212 @@ public class ProfielSpraakParser extends Parser {
 
 	public final RegelContext regel() throws RecognitionException {
 		RegelContext _localctx = new RegelContext(_ctx, getState());
-		enterRule(_localctx, 0, RULE_regel);
+		enterRule(_localctx, 2, RULE_regel);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(10);
-			match(MMAAK);
-			setState(11);
-			match(EEN);
-			setState(12);
-			match(SCORE);
-			setState(13);
-			match(MET);
-			setState(14);
-			match(DE);
-			setState(15);
-			match(VOLGENDE);
-			setState(16);
-			match(PARAMETERS);
-			setState(17);
-			match(DUBBELE_PUNT);
-			setState(18);
-			match(STREEPJE);
 			setState(19);
-			match(SCORE);
+			match(RREGEL);
 			setState(20);
-			match(IS);
+			((RegelContext)_localctx).rg = match(TEKST);
 			setState(21);
-			((RegelContext)_localctx).w = waarde();
+			match(LUIDT);
 			setState(22);
-			match(INDIEN);
-			setState(23);
-			match(AAN);
-			setState(24);
-			match(DE);
-			setState(25);
-			match(VOLGENDE);
-			setState(26);
-			match(VOORWAARDEN);
-			setState(27);
-			match(WORDT);
-			setState(28);
-			match(VOLDAAN);
-			setState(29);
 			match(DUBBELE_PUNT);
-			setState(31); 
+			setState(24); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(30);
+				setState(23);
+				toekenning();
+				}
+				}
+				setState(26); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==EN || _la==HHET );
+			setState(28);
+			match(INDIEN);
+			setState(29);
+			match(AAN);
+			setState(30);
+			match(ALLE);
+			setState(31);
+			match(VOLGENDE);
+			setState(32);
+			match(VOORWAARDEN);
+			setState(33);
+			match(WORDT);
+			setState(34);
+			match(VOLDAAN);
+			setState(35);
+			match(DUBBELE_PUNT);
+			setState(37); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(36);
 				object();
 				}
 				}
-				setState(33); 
+				setState(39); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==STREEPJE );
-			setState(35);
+			setState(41);
 			match(PUNT);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ToekenningContext extends ParserRuleContext {
+		public FeitContext f;
+		public WaardeContext w;
+		public FeitContext f1;
+		public FeitContext f2;
+		public TerminalNode WORDT() { return getToken(ProfielSpraakParser.WORDT, 0); }
+		public List<FeitContext> feit() {
+			return getRuleContexts(FeitContext.class);
+		}
+		public FeitContext feit(int i) {
+			return getRuleContext(FeitContext.class,i);
+		}
+		public TerminalNode HHET() { return getToken(ProfielSpraakParser.HHET, 0); }
+		public TerminalNode EN() { return getToken(ProfielSpraakParser.EN, 0); }
+		public List<TerminalNode> DE() { return getTokens(ProfielSpraakParser.DE); }
+		public TerminalNode DE(int i) {
+			return getToken(ProfielSpraakParser.DE, i);
+		}
+		public List<TerminalNode> HET() { return getTokens(ProfielSpraakParser.HET); }
+		public TerminalNode HET(int i) {
+			return getToken(ProfielSpraakParser.HET, i);
+		}
+		public TerminalNode GESTELD() { return getToken(ProfielSpraakParser.GESTELD, 0); }
+		public TerminalNode OP() { return getToken(ProfielSpraakParser.OP, 0); }
+		public TerminalNode BEREKEND() { return getToken(ProfielSpraakParser.BEREKEND, 0); }
+		public TerminalNode ALS() { return getToken(ProfielSpraakParser.ALS, 0); }
+		public TerminalNode MAAL() { return getToken(ProfielSpraakParser.MAAL, 0); }
+		public WaardeContext waarde() {
+			return getRuleContext(WaardeContext.class,0);
+		}
+		public ToekenningContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_toekenning; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProfielSpraakListener ) ((ProfielSpraakListener)listener).enterToekenning(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProfielSpraakListener ) ((ProfielSpraakListener)listener).exitToekenning(this);
+		}
+	}
+
+	public final ToekenningContext toekenning() throws RecognitionException {
+		ToekenningContext _localctx = new ToekenningContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_toekenning);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(48);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			case 1:
+				{
+				setState(43);
+				match(HHET);
+				}
+				break;
+			case 2:
+				{
+				setState(44);
+				match(EN);
+				setState(45);
+				match(DE);
+				}
+				break;
+			case 3:
+				{
+				setState(46);
+				match(EN);
+				setState(47);
+				match(HET);
+				}
+				break;
+			}
+			setState(50);
+			((ToekenningContext)_localctx).f = feit();
+			setState(51);
+			match(WORDT);
+			setState(63);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case GESTELD:
+				{
+				setState(52);
+				match(GESTELD);
+				setState(53);
+				match(OP);
+				setState(54);
+				((ToekenningContext)_localctx).w = waarde();
+				}
+				break;
+			case BEREKEND:
+				{
+				setState(55);
+				match(BEREKEND);
+				setState(56);
+				match(ALS);
+				setState(57);
+				_la = _input.LA(1);
+				if ( !(_la==DE || _la==HET) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(58);
+				((ToekenningContext)_localctx).f1 = feit();
+				setState(59);
+				match(MAAL);
+				setState(60);
+				_la = _input.LA(1);
+				if ( !(_la==DE || _la==HET) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(61);
+				((ToekenningContext)_localctx).f2 = feit();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
 			}
 			}
 		}
@@ -226,25 +416,17 @@ public class ProfielSpraakParser extends Parser {
 	public static class ObjectContext extends ParserRuleContext {
 		public FeitContext f;
 		public VergelijkingContext v;
-		public WaardeContext w1;
-		public Token not;
-		public WaardeContext w2;
+		public WaardeContext w;
 		public TerminalNode STREEPJE() { return getToken(ProfielSpraakParser.STREEPJE, 0); }
-		public TerminalNode DE() { return getToken(ProfielSpraakParser.DE, 0); }
-		public TerminalNode AANGIFTE() { return getToken(ProfielSpraakParser.AANGIFTE, 0); }
-		public TerminalNode HEEFT() { return getToken(ProfielSpraakParser.HEEFT, 0); }
-		public TerminalNode RUBRIEK() { return getToken(ProfielSpraakParser.RUBRIEK, 0); }
 		public FeitContext feit() {
 			return getRuleContext(FeitContext.class,0);
 		}
-		public TerminalNode BEVAT() { return getToken(ProfielSpraakParser.BEVAT, 0); }
 		public VergelijkingContext vergelijking() {
 			return getRuleContext(VergelijkingContext.class,0);
 		}
 		public WaardeContext waarde() {
 			return getRuleContext(WaardeContext.class,0);
 		}
-		public TerminalNode NIET() { return getToken(ProfielSpraakParser.NIET, 0); }
 		public ObjectContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -261,56 +443,19 @@ public class ProfielSpraakParser extends Parser {
 
 	public final ObjectContext object() throws RecognitionException {
 		ObjectContext _localctx = new ObjectContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_object);
-		int _la;
+		enterRule(_localctx, 6, RULE_object);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(37);
+			setState(65);
 			match(STREEPJE);
-			setState(38);
-			match(DE);
-			setState(39);
-			match(AANGIFTE);
-			setState(40);
-			match(HEEFT);
-			setState(41);
-			match(RUBRIEK);
-			setState(42);
+			setState(66);
 			((ObjectContext)_localctx).f = feit();
-			setState(51);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case IS:
-				{
-				setState(43);
-				((ObjectContext)_localctx).v = vergelijking();
-				setState(44);
-				((ObjectContext)_localctx).w1 = waarde();
-				}
-				break;
-			case BEVAT:
-				{
-				setState(46);
-				match(BEVAT);
-				setState(48);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if (_la==NIET) {
-					{
-					setState(47);
-					((ObjectContext)_localctx).not = match(NIET);
-					}
-				}
-
-				setState(50);
-				((ObjectContext)_localctx).w2 = waarde();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
+			setState(67);
+			((ObjectContext)_localctx).v = vergelijking();
+			setState(68);
+			((ObjectContext)_localctx).w = waarde();
 			}
 			}
 		}
@@ -350,37 +495,37 @@ public class ProfielSpraakParser extends Parser {
 
 	public final WaardeContext waarde() throws RecognitionException {
 		WaardeContext _localctx = new WaardeContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_waarde);
+		enterRule(_localctx, 8, RULE_waarde);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(61);
+			setState(78);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case WOORD:
 				{
-				setState(53);
+				setState(70);
 				((WaardeContext)_localctx).WOORD = match(WOORD);
 				 ((WaardeContext)_localctx).value =  (((WaardeContext)_localctx).WOORD!=null?((WaardeContext)_localctx).WOORD.getText():null); 
 				}
 				break;
 			case TEKST:
 				{
-				setState(55);
+				setState(72);
 				((WaardeContext)_localctx).TEKST = match(TEKST);
 				 ((WaardeContext)_localctx).value =  "\"" + (((WaardeContext)_localctx).TEKST!=null?((WaardeContext)_localctx).TEKST.getText():null) + "\""; 
 				}
 				break;
 			case GETAL:
 				{
-				setState(57);
+				setState(74);
 				((WaardeContext)_localctx).GETAL = match(GETAL);
 				 ((WaardeContext)_localctx).value =  (((WaardeContext)_localctx).GETAL!=null?((WaardeContext)_localctx).GETAL.getText():null); 
 				}
 				break;
 			case GETAL_NUL:
 				{
-				setState(59);
+				setState(76);
 				match(GETAL_NUL);
 				 ((WaardeContext)_localctx).value =  "0"; 
 				}
@@ -427,85 +572,85 @@ public class ProfielSpraakParser extends Parser {
 
 	public final VergelijkingContext vergelijking() throws RecognitionException {
 		VergelijkingContext _localctx = new VergelijkingContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_vergelijking);
+		enterRule(_localctx, 10, RULE_vergelijking);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92);
+			setState(109);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				{
-				setState(63);
+				setState(80);
 				match(IS);
-				setState(64);
+				setState(81);
 				match(GELIJK);
-				setState(65);
+				setState(82);
 				match(AAN);
 				 ((VergelijkingContext)_localctx).operator =  "=="; 
 				}
 				break;
 			case 2:
 				{
-				setState(67);
+				setState(84);
 				match(IS);
-				setState(68);
+				setState(85);
 				match(NIET);
-				setState(69);
+				setState(86);
 				match(GELIJK);
-				setState(70);
+				setState(87);
 				match(AAN);
 				 ((VergelijkingContext)_localctx).operator =  "!="; 
 				}
 				break;
 			case 3:
 				{
-				setState(72);
+				setState(89);
 				match(IS);
-				setState(73);
+				setState(90);
 				match(GROTER);
-				setState(74);
+				setState(91);
 				match(OF);
-				setState(75);
+				setState(92);
 				match(GELIJK);
-				setState(76);
+				setState(93);
 				match(AAN);
 				 ((VergelijkingContext)_localctx).operator =  ">="; 
 				}
 				break;
 			case 4:
 				{
-				setState(78);
+				setState(95);
 				match(IS);
-				setState(79);
+				setState(96);
 				match(GROTER);
-				setState(80);
+				setState(97);
 				match(DAN);
 				 ((VergelijkingContext)_localctx).operator =  ">";  
 				}
 				break;
 			case 5:
 				{
-				setState(82);
+				setState(99);
 				match(IS);
-				setState(83);
+				setState(100);
 				match(KLEINER);
-				setState(84);
+				setState(101);
 				match(OF);
-				setState(85);
+				setState(102);
 				match(GELIJK);
-				setState(86);
+				setState(103);
 				match(AAN);
 				 ((VergelijkingContext)_localctx).operator =  "<="; 
 				}
 				break;
 			case 6:
 				{
-				setState(88);
+				setState(105);
 				match(IS);
-				setState(89);
+				setState(106);
 				match(KLEINER);
-				setState(90);
+				setState(107);
 				match(DAN);
 				 ((VergelijkingContext)_localctx).operator =  "<";  
 				}
@@ -531,6 +676,10 @@ public class ProfielSpraakParser extends Parser {
 		public TerminalNode WOORD(int i) {
 			return getToken(ProfielSpraakParser.WOORD, i);
 		}
+		public List<TerminalNode> AAN() { return getTokens(ProfielSpraakParser.AAN); }
+		public TerminalNode AAN(int i) {
+			return getToken(ProfielSpraakParser.AAN, i);
+		}
 		public FeitContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -547,27 +696,42 @@ public class ProfielSpraakParser extends Parser {
 
 	public final FeitContext feit() throws RecognitionException {
 		FeitContext _localctx = new FeitContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_feit);
+		enterRule(_localctx, 12, RULE_feit);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(94);
+			setState(111);
 			((FeitContext)_localctx).WOORD = match(WOORD);
 			 ((FeitContext)_localctx).signifier =  (((FeitContext)_localctx).WOORD!=null?((FeitContext)_localctx).WOORD.getText():null); 
-			setState(100);
+			setState(119);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==WOORD) {
+			while (_la==AAN || _la==WOORD) {
 				{
-				{
-				setState(96);
-				((FeitContext)_localctx).WOORD = match(WOORD);
-				 _localctx.signifier += (" " + (((FeitContext)_localctx).WOORD!=null?((FeitContext)_localctx).WOORD.getText():null)); 
+				setState(117);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case WOORD:
+					{
+					setState(113);
+					((FeitContext)_localctx).WOORD = match(WOORD);
+					 _localctx.signifier += ("_" + (((FeitContext)_localctx).WOORD!=null?((FeitContext)_localctx).WOORD.getText():null)); 
+					}
+					break;
+				case AAN:
+					{
+					setState(115);
+					match(AAN);
+					 _localctx.signifier += ("_aan"); 
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
 				}
 				}
-				setState(102);
+				setState(121);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -586,32 +750,37 @@ public class ProfielSpraakParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3#j\4\2\t\2\4\3\t\3"+
-		"\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3"+
-		"\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\6\2\"\n\2\r\2\16\2#\3\2\3\2\3\3"+
-		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\63\n\3\3\3\5\3\66\n\3\3\4"+
-		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4@\n\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5"+
-		"\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3"+
-		"\5\3\5\3\5\3\5\5\5_\n\5\3\6\3\6\3\6\3\6\7\6e\n\6\f\6\16\6h\13\6\3\6\2"+
-		"\2\7\2\4\6\b\n\2\2p\2\f\3\2\2\2\4\'\3\2\2\2\6?\3\2\2\2\b^\3\2\2\2\n`\3"+
-		"\2\2\2\f\r\7\22\2\2\r\16\7\13\2\2\16\17\7\30\2\2\17\20\7\23\2\2\20\21"+
-		"\7\n\2\2\21\22\7\32\2\2\22\23\7\26\2\2\23\24\7\35\2\2\24\25\7 \2\2\25"+
-		"\26\7\30\2\2\26\27\7\20\2\2\27\30\5\6\4\2\30\31\7\17\2\2\31\32\7\7\2\2"+
-		"\32\33\7\n\2\2\33\34\7\32\2\2\34\35\7\33\2\2\35\36\7\34\2\2\36\37\7\31"+
-		"\2\2\37!\7\35\2\2 \"\5\4\3\2! \3\2\2\2\"#\3\2\2\2#!\3\2\2\2#$\3\2\2\2"+
-		"$%\3\2\2\2%&\7\37\2\2&\3\3\2\2\2\'(\7 \2\2()\7\n\2\2)*\7\6\2\2*+\7\16"+
-		"\2\2+,\7\27\2\2,\65\5\n\6\2-.\5\b\5\2./\5\6\4\2/\66\3\2\2\2\60\62\7\b"+
-		"\2\2\61\63\7\24\2\2\62\61\3\2\2\2\62\63\3\2\2\2\63\64\3\2\2\2\64\66\5"+
-		"\6\4\2\65-\3\2\2\2\65\60\3\2\2\2\66\5\3\2\2\2\678\7\"\2\28@\b\4\1\29:"+
-		"\7\5\2\2:@\b\4\1\2;<\7!\2\2<@\b\4\1\2=>\7\36\2\2>@\b\4\1\2?\67\3\2\2\2"+
-		"?9\3\2\2\2?;\3\2\2\2?=\3\2\2\2@\7\3\2\2\2AB\7\20\2\2BC\7\f\2\2CD\7\7\2"+
-		"\2D_\b\5\1\2EF\7\20\2\2FG\7\24\2\2GH\7\f\2\2HI\7\7\2\2I_\b\5\1\2JK\7\20"+
-		"\2\2KL\7\r\2\2LM\7\25\2\2MN\7\f\2\2NO\7\7\2\2O_\b\5\1\2PQ\7\20\2\2QR\7"+
-		"\r\2\2RS\7\t\2\2S_\b\5\1\2TU\7\20\2\2UV\7\21\2\2VW\7\25\2\2WX\7\f\2\2"+
-		"XY\7\7\2\2Y_\b\5\1\2Z[\7\20\2\2[\\\7\21\2\2\\]\7\t\2\2]_\b\5\1\2^A\3\2"+
-		"\2\2^E\3\2\2\2^J\3\2\2\2^P\3\2\2\2^T\3\2\2\2^Z\3\2\2\2_\t\3\2\2\2`a\7"+
-		"\"\2\2af\b\6\1\2bc\7\"\2\2ce\b\6\1\2db\3\2\2\2eh\3\2\2\2fd\3\2\2\2fg\3"+
-		"\2\2\2g\13\3\2\2\2hf\3\2\2\2\b#\62\65?^f";
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3%}\4\2\t\2\4\3\t\3"+
+		"\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\6\2\22\n\2\r\2\16\2\23\3"+
+		"\3\3\3\3\3\3\3\3\3\6\3\33\n\3\r\3\16\3\34\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
+		"\3\3\3\3\6\3(\n\3\r\3\16\3)\3\3\3\3\3\4\3\4\3\4\3\4\3\4\5\4\63\n\4\3\4"+
+		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4B\n\4\3\5\3\5\3\5"+
+		"\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6Q\n\6\3\7\3\7\3\7\3\7\3\7"+
+		"\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3"+
+		"\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7p\n\7\3\b\3\b\3\b\3\b\3\b\3\b\7\bx\n\b\f"+
+		"\b\16\b{\13\b\3\b\2\2\t\2\4\6\b\n\f\16\2\3\4\2\13\13\21\21\u0085\2\21"+
+		"\3\2\2\2\4\25\3\2\2\2\6\62\3\2\2\2\bC\3\2\2\2\nP\3\2\2\2\fo\3\2\2\2\16"+
+		"q\3\2\2\2\20\22\5\4\3\2\21\20\3\2\2\2\22\23\3\2\2\2\23\21\3\2\2\2\23\24"+
+		"\3\2\2\2\24\3\3\2\2\2\25\26\7\32\2\2\26\27\7\5\2\2\27\30\7\25\2\2\30\32"+
+		"\7\37\2\2\31\33\5\6\4\2\32\31\3\2\2\2\33\34\3\2\2\2\34\32\3\2\2\2\34\35"+
+		"\3\2\2\2\35\36\3\2\2\2\36\37\7\22\2\2\37 \7\6\2\2 !\7\7\2\2!\"\7\34\2"+
+		"\2\"#\7\35\2\2#$\7\36\2\2$%\7\33\2\2%\'\7\37\2\2&(\5\b\5\2\'&\3\2\2\2"+
+		"()\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*+\3\2\2\2+,\7!\2\2,\5\3\2\2\2-\63\7\20"+
+		"\2\2./\7\f\2\2/\63\7\13\2\2\60\61\7\f\2\2\61\63\7\21\2\2\62-\3\2\2\2\62"+
+		".\3\2\2\2\62\60\3\2\2\2\63\64\3\2\2\2\64\65\5\16\b\2\65A\7\36\2\2\66\67"+
+		"\7\16\2\2\678\7\31\2\28B\5\n\6\29:\7\t\2\2:;\7\b\2\2;<\t\2\2\2<=\5\16"+
+		"\b\2=>\7\26\2\2>?\t\2\2\2?@\5\16\b\2@B\3\2\2\2A\66\3\2\2\2A9\3\2\2\2B"+
+		"\7\3\2\2\2CD\7\"\2\2DE\5\16\b\2EF\5\f\7\2FG\5\n\6\2G\t\3\2\2\2HI\7$\2"+
+		"\2IQ\b\6\1\2JK\7\5\2\2KQ\b\6\1\2LM\7#\2\2MQ\b\6\1\2NO\7 \2\2OQ\b\6\1\2"+
+		"PH\3\2\2\2PJ\3\2\2\2PL\3\2\2\2PN\3\2\2\2Q\13\3\2\2\2RS\7\23\2\2ST\7\r"+
+		"\2\2TU\7\6\2\2Up\b\7\1\2VW\7\23\2\2WX\7\27\2\2XY\7\r\2\2YZ\7\6\2\2Zp\b"+
+		"\7\1\2[\\\7\23\2\2\\]\7\17\2\2]^\7\30\2\2^_\7\r\2\2_`\7\6\2\2`p\b\7\1"+
+		"\2ab\7\23\2\2bc\7\17\2\2cd\7\n\2\2dp\b\7\1\2ef\7\23\2\2fg\7\24\2\2gh\7"+
+		"\30\2\2hi\7\r\2\2ij\7\6\2\2jp\b\7\1\2kl\7\23\2\2lm\7\24\2\2mn\7\n\2\2"+
+		"np\b\7\1\2oR\3\2\2\2oV\3\2\2\2o[\3\2\2\2oa\3\2\2\2oe\3\2\2\2ok\3\2\2\2"+
+		"p\r\3\2\2\2qr\7$\2\2ry\b\b\1\2st\7$\2\2tx\b\b\1\2uv\7\6\2\2vx\b\b\1\2"+
+		"ws\3\2\2\2wu\3\2\2\2x{\3\2\2\2yw\3\2\2\2yz\3\2\2\2z\17\3\2\2\2{y\3\2\2"+
+		"\2\13\23\34)\62APowy";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

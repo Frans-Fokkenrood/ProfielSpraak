@@ -13,24 +13,17 @@ set CLASSPATH=%CLASSPATH%;..\..\..\droolsjbpm-tools-distribution-6.3.0.Final\bin
 set CLASSPATH=%CLASSPATH%;..\..\..\droolsjbpm-tools-distribution-6.3.0.Final\binaries\mvel2-2.2.6.Final.jar
 set CLASSPATH=%CLASSPATH%;..\..\..\droolsjbpm-tools-distribution-6.3.0.Final\binaries\protobuf-java-2.5.0.jar
 
-set regel="Maak een score met de volgende parameters:
-set regel=%regel%  - score is HOOG 
-set regel=%regel%indien aan de volgende voorwaarden wordt voldaan:
-set regel=%regel%  - de aangifte heeft rubriek bestemming is gelijk aan \"Drankrijk\"
-set regel=%regel%  - de aangifte heeft rubriek omschrijving bevat \"BOM\"
-set regel=%regel%."
-
-set bestemming="Frankrijk"
-set omschrijving="BOMmetje"
+set regelset=..\data\ProfielSpraak.txt
+set omschrijving=Fiets&&			rem Omschrijvingen die worden herkend, zijn: Fiets, Fietsbroek of Kippenvlees
+set herkomst=India&&				rem Landen van herkomst die worden herkend, zijn: Taiwan, China, India of Nederland
 
 cls
 echo.
-echo De regel luidt:
-echo ----------------
+echo FIETS:
+echo ------
 echo.
-java com.fokkenrood.antlr.Interpreteer %regel% %bestemming% %omschrijving%
-echo ----------------
+java com.fokkenrood.antlr.Interpreteer "%regelset%" "%omschrijving%" "%herkomst%"
 echo.
-echo met als aangegeven attributen: bestemming=%bestemming% en omschrijving=%omschrijving%...
+echo (met als ingevoerde attributen: goederen_omschrijving='%omschrijving%' en land_van_herkomst='%herkomst%')
 echo.
 echo Ready!

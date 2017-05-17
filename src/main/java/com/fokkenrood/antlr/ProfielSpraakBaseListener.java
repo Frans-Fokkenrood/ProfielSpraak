@@ -16,6 +16,18 @@ public class ProfielSpraakBaseListener implements ProfielSpraakListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStatements(ProfielSpraakParser.StatementsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatements(ProfielSpraakParser.StatementsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRegel(ProfielSpraakParser.RegelContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -23,6 +35,18 @@ public class ProfielSpraakBaseListener implements ProfielSpraakListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRegel(ProfielSpraakParser.RegelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterToekenning(ProfielSpraakParser.ToekenningContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitToekenning(ProfielSpraakParser.ToekenningContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

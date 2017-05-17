@@ -4,12 +4,13 @@ import java.util.Calendar;
 
 import com.fokkenrood.antlr.ProfielSpraakParser.ObjectContext;
 import com.fokkenrood.antlr.ProfielSpraakParser.RegelContext;
+import com.fokkenrood.antlr.ProfielSpraakParser.StatementsContext;
+import com.fokkenrood.antlr.ProfielSpraakParser.ToekenningContext;
 
 
 public class AangifteDroolsListener extends ProfielSpraakBaseListener {
 	private Calendar		TODAY			= Calendar.getInstance();
-	private String			regel			= "Regel";
-	private String			regelset		= "Regelset";
+	private StringBuilder	drlRset			= new StringBuilder();
 	private StringBuilder	drlWhen			= new StringBuilder();
 	private StringBuilder	drlThen			= new StringBuilder();
 
@@ -20,19 +21,22 @@ public class AangifteDroolsListener extends ProfielSpraakBaseListener {
 
 	//	GET-er:
 	public String getDRL() {
-		return (drlWhen.toString() + drlThen.toString());
+		return (drlRset.toString());
 	}
 
 	
 	@Override
+	public void enterStatements(StatementsContext ctx) {
+		drlRset.setLength(0);
+		drlRset.append("package Regelset\n\n");
+		drlRset.append("import com.fokkenrood.drools.Aangifte;\n\n");
+	}	// end enterStatements
+
+	@Override
 	public void enterRegel(RegelContext ctx) {
 		drlWhen.setLength(0);
-		drlWhen.append("package ");
-		drlWhen.append(regelset);
-		drlWhen.append("\n\n");
-		drlWhen.append("import com.fokkenrood.drools.Aangifte;\n\n");
 		drlWhen.append("rule \"");
-		drlWhen.append(regel);
+		drlWhen.append(ctx.rg.getText());
 		drlWhen.append("\"\n");
 		drlWhen.append("  when\n");
 		drlThen.setLength(0);
@@ -43,31 +47,49 @@ public class AangifteDroolsListener extends ProfielSpraakBaseListener {
 
 	@Override
 	public void exitRegel(RegelContext ctx) {
-		drlThen.append("    $aangifte.setScore(\"");
-		drlThen.append(ctx.w.getText());
+		drlThen.append("    $aangifte.setRegel_naam(\"");
+		drlThen.append(ctx.rg.getText());
 		drlThen.append("\");\n");
-		drlThen.append("end\n");
+		drlThen.append("end\n\n");
+		drlRset.append(drlWhen.toString() + drlThen.toString());
 	}	// end exitRegel
+
+	
+	@Override
+	public void exitToekenning(ToekenningContext ctx) {
+		if (ctx.w != null) {
+			drlThen.append("    $aangifte.set");
+			drlThen.append(ctx.f.signifier.substring(0, 1).toUpperCase());
+			drlThen.append(ctx.f.signifier.substring(1));
+			drlThen.append("(");
+			drlThen.append(ctx.w.value);
+			drlThen.append(");\n");
+		}
+		if (ctx.f1 != null) {
+			drlThen.append("    $aangifte.set");
+			drlThen.append(ctx.f.signifier.substring(0, 1).toUpperCase());
+			drlThen.append(ctx.f.signifier.substring(1));
+			drlThen.append("(($aangifte.get");
+			drlThen.append(ctx.f1.signifier.substring(0, 1).toUpperCase());
+			drlThen.append(ctx.f1.signifier.substring(1));
+			drlThen.append("() * $aangifte.get");
+			drlThen.append(ctx.f2.signifier.substring(0, 1).toUpperCase());
+			drlThen.append(ctx.f2.signifier.substring(1));
+			drlThen.append("()) / 100);\n");
+		}
+	}	// end exitToekenning
 
 	
 	@Override
 	public void exitObject(ObjectContext ctx) {
 		drlWhen.append(drlWhen.indexOf("$aangifte") < 1 ? "    $aangifte : Aangifte(\n" : ",\n");
-		if (ctx.w1 != null) {
+		if (ctx.w != null) {
 			drlWhen.append("      ");
 			drlWhen.append(ctx.f.signifier);
 			drlWhen.append(" ");
 			drlWhen.append(ctx.v.operator);
 			drlWhen.append(" ");
-			drlWhen.append(ctx.w1.value);
-		}	// end if
-		if (ctx.w2 != null) {
-			drlWhen.append("      ");
-			drlWhen.append(ctx.f.signifier);
-			drlWhen.append((ctx.not != null ? " not" : ""));
-			drlWhen.append(" matches \".*(");
-			drlWhen.append(ctx.w2.getText());
-			drlWhen.append(").*\"");
+			drlWhen.append(ctx.w.value);
 		}	// end if
 	}	// end exitObject
 	

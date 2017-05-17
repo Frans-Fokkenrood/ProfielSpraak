@@ -1,0 +1,123 @@
+//	Fietsen:
+Regel "ACTN_2_1" luidt:
+Het percentage invoerrecht wordt gesteld op 50
+	en de factuurwaarde wordt gesteld op 1500
+	en het bedrag aan invoerrecht wordt berekend als de factuurwaarde maal het percentage invoerrecht
+	en het certificaat wordt gesteld op "geen"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Fiets"
+	- land van herkomst is gelijk aan "Taiwan"
+	.
+
+Regel "ACTN_2_2" luidt:
+Het percentage invoerrecht wordt gesteld op 25
+	en de factuurwaarde wordt gesteld op 1500
+	en het bedrag aan invoerrecht wordt berekend als de factuurwaarde maal het percentage invoerrecht
+	en het certificaat wordt gesteld op "geen"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Fiets"
+	- land van herkomst is gelijk aan "China"
+	.
+
+Regel "ACTN_2_3" luidt:
+Het percentage invoerrecht wordt gesteld op 10
+	en de factuurwaarde wordt gesteld op 1500
+	en het bedrag aan invoerrecht wordt berekend als de factuurwaarde maal het percentage invoerrecht
+	en het certificaat wordt gesteld op "geen"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Fiets"
+	- land van herkomst is gelijk aan "India"
+	.
+
+Regel "ACTN_2_4" luidt:
+Het percentage invoerrecht wordt gesteld op 0
+	en de factuurwaarde wordt gesteld op 1500
+	en het bedrag aan invoerrecht wordt berekend als het percentage invoerrecht maal de factuurwaarde
+	en het certificaat wordt gesteld op "geen"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Fiets"
+	- land van herkomst is gelijk aan "Nederland"
+	.
+
+
+//	Fietsbroeken:
+Regel "ACTN_2_5" luidt:
+Het percentage invoerrecht wordt gesteld op 1
+	en de factuurwaarde wordt gesteld op 200
+	en het bedrag aan invoerrecht wordt berekend als het percentage invoerrecht maal de factuurwaarde
+	en het certificaat wordt gesteld op "CE"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Fietsbroek"
+	- land van herkomst is gelijk aan "Taiwan"
+	.
+
+Regel "ACTN_2_6" luidt:
+Het percentage invoerrecht wordt gesteld op 20
+	en de factuurwaarde wordt gesteld op 200
+	en het bedrag aan invoerrecht wordt berekend als het percentage invoerrecht maal de factuurwaarde
+	en het certificaat wordt gesteld op "CE"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Fietsbroek"
+	- land van herkomst is gelijk aan "China"
+	.
+
+Regel "ACTN_2_7" luidt:
+Het percentage invoerrecht wordt gesteld op 50
+	en de factuurwaarde wordt gesteld op 200
+	en het bedrag aan invoerrecht wordt berekend als het percentage invoerrecht maal de factuurwaarde
+	en het certificaat wordt gesteld op "CE"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Fietsbroek"
+	- land van herkomst is gelijk aan "India"
+	.
+
+Regel "ACTN_2_8" luidt:
+Het percentage invoerrecht wordt gesteld op 0
+	en de factuurwaarde wordt gesteld op 200
+	en het bedrag aan invoerrecht wordt berekend als het percentage invoerrecht maal de factuurwaarde
+	en het certificaat wordt gesteld op "geen"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Fietsbroek"
+	- land van herkomst is gelijk aan "Nederland"
+	.
+
+//	Kippenvlees:
+Regel "ACTN_2_9" luidt:
+Het percentage invoerrecht wordt gesteld op 5
+	en de factuurwaarde wordt gesteld op 1000
+	en het bedrag aan invoerrecht wordt berekend als de factuurwaarde maal het percentage invoerrecht
+	en het certificaat wordt gesteld op "Vleeskeuringscerticicaat"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Kippenvlees"
+	- land van herkomst is gelijk aan "Taiwan"
+	.
+
+Regel "ACTN_2_10" luidt:
+Het percentage invoerrecht wordt gesteld op 40
+	en de factuurwaarde wordt gesteld op 1000
+	en het bedrag aan invoerrecht wordt berekend als de factuurwaarde maal het percentage invoerrecht
+	en het certificaat wordt gesteld op "Vleeskeuringscerticicaat"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Kippenvlees"
+	- land van herkomst is gelijk aan "China"
+	.
+
+Regel "ACTN_2_11" luidt:
+Het percentage invoerrecht wordt gesteld op 22
+	en de factuurwaarde wordt gesteld op 1000
+	en het bedrag aan invoerrecht wordt berekend als de factuurwaarde maal het percentage invoerrecht
+	en het certificaat wordt gesteld op "Vleeskeuringscerticicaat"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Kippenvlees"
+	- land van herkomst is gelijk aan "India"
+	.
+
+Regel "ACTN_2_12" luidt:
+Het percentage invoerrecht wordt gesteld op 0
+	en de factuurwaarde wordt gesteld op 1000
+	en het bedrag aan invoerrecht wordt berekend als het percentage invoerrecht maal de factuurwaarde
+	en het certificaat wordt gesteld op "geen"
+indien aan alle volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Kippenvlees"
+	- land van herkomst is gelijk aan "Nederland"
+	.
