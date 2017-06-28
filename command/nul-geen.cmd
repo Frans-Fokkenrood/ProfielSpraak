@@ -13,7 +13,7 @@ set CLASSPATH=%CLASSPATH%;..\..\..\droolsjbpm-tools-distribution-6.3.0.Final\bin
 set CLASSPATH=%CLASSPATH%;..\..\..\droolsjbpm-tools-distribution-6.3.0.Final\binaries\mvel2-2.2.6.Final.jar
 set CLASSPATH=%CLASSPATH%;..\..\..\droolsjbpm-tools-distribution-6.3.0.Final\binaries\protobuf-java-2.5.0.jar
 
-set regelset=..\data\ProfielSpraak.txt
+set regelset=FILE:..\data\ProfielSpraak.txt
 set omschrijving=Fiets&&			rem Omschrijvingen die worden herkend, zijn: Fiets, Fietsbroek of Kippenvlees
 set herkomst=Nederland&&			rem Landen van herkomst die worden herkend, zijn: Taiwan, China, India of Nederland
 

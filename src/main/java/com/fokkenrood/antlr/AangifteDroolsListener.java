@@ -10,7 +10,7 @@ import com.fokkenrood.antlr.ProfielSpraakParser.ToekenningContext;
 
 public class AangifteDroolsListener extends ProfielSpraakBaseListener {
 	private Calendar		TODAY			= Calendar.getInstance();
-	private StringBuilder	drlRset			= new StringBuilder();
+	private StringBuilder	drlResult		= new StringBuilder();
 	private StringBuilder	drlWhen			= new StringBuilder();
 	private StringBuilder	drlThen			= new StringBuilder();
 
@@ -20,16 +20,16 @@ public class AangifteDroolsListener extends ProfielSpraakBaseListener {
 	}	// end constructor
 
 	//	GET-er:
-	public String getDRL() {
-		return (drlRset.toString());
-	}
+	public String getResult() {
+		return (drlResult.toString());
+	}	// end getResult
 
 	
 	@Override
 	public void enterStatements(StatementsContext ctx) {
-		drlRset.setLength(0);
-		drlRset.append("package Regelset\n\n");
-		drlRset.append("import com.fokkenrood.drools.Aangifte;\n\n");
+		drlResult.setLength(0);
+		drlResult.append("package Regelset\n\n");
+		drlResult.append("import com.fokkenrood.drools.Aangifte;\n\n");
 	}	// end enterStatements
 
 	@Override
@@ -51,7 +51,7 @@ public class AangifteDroolsListener extends ProfielSpraakBaseListener {
 		drlThen.append(ctx.rg.getText());
 		drlThen.append("\");\n");
 		drlThen.append("end\n\n");
-		drlRset.append(drlWhen.toString() + drlThen.toString());
+		drlResult.append(drlWhen.toString() + drlThen.toString());
 	}	// end exitRegel
 
 	

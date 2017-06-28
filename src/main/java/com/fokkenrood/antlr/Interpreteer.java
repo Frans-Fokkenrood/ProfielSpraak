@@ -18,24 +18,40 @@ import com.fokkenrood.drools.Aangifte;
 public class Interpreteer {
 
 	public static void main(String[] args) throws Exception {
+		//	Lees ProfielSpraak via een bestand, of direct vanaf sysin:
+		String regelset = (args.length > 0) ? args[0] : "FILE:data\\ProfielSpraak.txt";
+		ANTLRInputStream input = null;
+		if (regelset.startsWith("FILE:")) {
+			input = new ANTLRFileStream(regelset.substring(5));
+		} else {
+			input = new ANTLRInputStream(regelset.substring(5));
+			System.out.println(regelset.substring(5));
+		}	// end if
+
 		//	Compileer:
-		ANTLRInputStream 		input 		= new ANTLRFileStream((args.length > 0) ? args[0] : "data\\ProfielSpraak.txt");
-		ProfielSpraakLexer		lexer		= new ProfielSpraakLexer(input);
-		CommonTokenStream		tokens		= new CommonTokenStream(lexer);
-		ProfielSpraakParser		parser		= new ProfielSpraakParser(tokens);
-		AangifteDroolsListener	listener	= new AangifteDroolsListener();
-		ParseTree				tree		= parser.statements();
+		ProfielSpraakLexer lexer = new ProfielSpraakLexer(input);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		ProfielSpraakParser parser = new ProfielSpraakParser(tokens);
+		parser.removeErrorListeners();
+		parser.addErrorListener(new AangifteErrorListener());
+		AangifteDroolsListener listener = new AangifteDroolsListener();
+		ParseTree tree = parser.statements();
 		new ParseTreeWalker().walk(listener, tree);
-		String 					drlRset		= listener.getDRL();
 		
-		//	Debug info:
-		System.out.println("- De ANTLR4 compiler neemt als bron '" + input.getSourceName() + "'...\n");
-//		System.out.println(drlRset);
+		//	Controleer op fouten in de ProfielSpraak:
+		String message = ((AangifteErrorListener) parser.getErrorListeners().get(0)).getMessage();
+		if (message.length() > 0) {
+			System.out.println(message);
+			return;
+		}	// end if
+
+		//	Het statement is correct, dus roep de beslis-service aan:
+		String result = listener.getResult();
+//		System.out.println(result);
 		
-		//	Beslis:
 		KieServices ks = KieServices.Factory.get();
 		KieFileSystem kfs = ks.newKieFileSystem();
-		kfs.write("src/main/resources/Regel.drl", ks.getResources().newReaderResource(new StringReader(drlRset)));
+		kfs.write("src/main/resources/Regel.drl", ks.getResources().newReaderResource(new StringReader(result)));
 		KieBuilder kb = ks.newKieBuilder(kfs).buildAll();
 		KieContainer kc = ks.newKieContainer(kb.getKieModule().getReleaseId());
 		KieSession ksession = kc.newKieSession();

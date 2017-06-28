@@ -13,14 +13,24 @@ set CLASSPATH=%CLASSPATH%;..\..\..\droolsjbpm-tools-distribution-6.3.0.Final\bin
 set CLASSPATH=%CLASSPATH%;..\..\..\droolsjbpm-tools-distribution-6.3.0.Final\binaries\mvel2-2.2.6.Final.jar
 set CLASSPATH=%CLASSPATH%;..\..\..\droolsjbpm-tools-distribution-6.3.0.Final\binaries\protobuf-java-2.5.0.jar
 
-set regelset=FILE:..\data\ProfielSpraak.txt
-set omschrijving=Fietsbroek&&		rem Omschrijvingen die worden herkend, zijn: Fiets, Fietsbroek of Kippenvlees
-set herkomst=China&&				rem Landen van herkomst die worden herkend, zijn: Taiwan, China, India of Nederland
+set regelset=RULE:
+set regelset=%regelset%Regel \"FOUTJE\" luidt: 
+set regelset=%regelset%Het percentage invoerrecht wordt gesteld op 50
+set regelset=%regelset%  en de factuurwaarde wordt gesteld op 1500
+set regelset=%regelset%  en het bedrag aan invoerrecht wordt gerekend als de factuurwaarde maal het percentage invoerrecht
+set regelset=%regelset%  en het certificaat wordt gesteld op \"geen\" 
+set regelset=%regelset%indien aan de volgende voorwaarden wordt voldaan:
+set regelset=%regelset%  - goederen omschrijving is gelijk aan \"Fiets\" 
+set regelset=%regelset%  - land van herkomst is gelijk aan \"Taiwan\"
+set regelset=%regelset%.
+
+set omschrijving=Fiets&&			rem Omschrijvingen die worden herkend, zijn: Fiets, Fietsbroek of Kippenvlees
+set herkomst=India&&				rem Landen van herkomst die worden herkend, zijn: Taiwan, China, India of Nederland
 
 cls
 echo.
-echo FIETSBROEK:
-echo -----------
+echo FIETS:
+echo ------
 echo.
 java com.fokkenrood.antlr.Interpreteer "%regelset%" "%omschrijving%" "%herkomst%"
 echo.
