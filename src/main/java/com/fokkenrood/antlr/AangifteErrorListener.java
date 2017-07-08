@@ -18,7 +18,7 @@ public class AangifteErrorListener extends BaseErrorListener {
 		
 		String part[] = msg.split("(mismatched|input| expecting) ");
 		
-		message.append("Foutje op lijn ");
+		message.append("\nFoutje op lijn ");
 		message.append(line);
 		message.append(" rond positie ");
 		message.append(charPositionInLine);

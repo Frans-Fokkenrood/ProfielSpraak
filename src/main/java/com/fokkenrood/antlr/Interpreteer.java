@@ -24,8 +24,7 @@ public class Interpreteer {
 		if (regelset.startsWith("FILE:")) {
 			input = new ANTLRFileStream(regelset.substring(5));
 		} else {
-			input = new ANTLRInputStream(regelset.substring(5));
-			System.out.println(regelset.substring(5));
+			input = new ANTLRInputStream(regelset.substring(5).replaceAll("##", "\n"));
 		}	// end if
 
 		//	Compileer:
@@ -41,6 +40,10 @@ public class Interpreteer {
 		//	Controleer op fouten in de ProfielSpraak:
 		String message = ((AangifteErrorListener) parser.getErrorListeners().get(0)).getMessage();
 		if (message.length() > 0) {
+			int nr = 0;
+			for (String regel : regelset.substring(5).split("##")) {
+				System.out.println(String.format("%02d", ++nr) + "| " + regel);
+			}	// end for
 			System.out.println(message);
 			return;
 		}	// end if
