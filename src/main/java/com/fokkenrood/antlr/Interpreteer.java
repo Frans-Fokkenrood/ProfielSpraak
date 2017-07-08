@@ -72,7 +72,7 @@ public class Interpreteer {
 		if (count == 0) {
 			System.out.println("Er heeft geen enkele regel gevuurd!");
 		} else {	
-			System.out.println("- Regel '" + aangifte.getRegel_naam() + "'heeft gevuurd...");
+			System.out.println("- Regel '" + aangifte.getRegel_naam() + "' heeft gevuurd...");
 			System.out.println("  -- het bedrag aan invoerrecht is: " + aangifte.getBedrag_aan_invoerrecht());
 			System.out.println("  -- het certificaat is: '" + aangifte.getCertificaat() + "'");
 		}	// end if
