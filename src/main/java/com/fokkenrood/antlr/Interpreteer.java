@@ -20,6 +20,19 @@ public class Interpreteer {
 	public static void main(String[] args) throws Exception {
 		//	Lees ProfielSpraak via een bestand, of direct vanaf sysin:
 		String regelset = (args.length > 0) ? args[0] : "FILE:data\\ProfielSpraak.txt";
+		
+		/* TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST */
+		regelset = "RULE:Regel \"FOUTJE\" luidt:##"
+				+ "Het percentage invoerrecht wordt gesteld op 50##"
+				+ "  en de factuurwaarde wordt gesteld op 1500##"
+				+ "  en het bedrag aan invoerrecht wordt berekend als de factuurwaarde maal het percentage invoerrecht##"
+				+ "  en een certificaat wordt gesteld op \"geen\"##"
+				+ "indien aan de volgende voorwaarden wordt voldaan:##"
+				+ "  - goederen omschrijving is gelijk aan \"Fiets\"##"
+				+ "  - land van herkomst is gelijk aan \"India\"##"
+				+ ".##";
+		/* TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST */
+		
 		ANTLRInputStream input = null;
 		if (regelset.startsWith("FILE:")) {
 			input = new ANTLRFileStream(regelset.substring(5));
